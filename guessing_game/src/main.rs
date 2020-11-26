@@ -7,8 +7,14 @@ fn main() {
     println!("Guess your number:");
 
     let secret_number = rand::thread_rng().gen_range(1, 100);
+    let mut attempts = 10;
 
     loop {
+        if attempts == 0 {
+            println!("You lose! Secret number was {}", secret_number);
+            break;
+        }
+
         let mut user_guess = String::new();
 
         io::stdin()
@@ -28,5 +34,8 @@ fn main() {
                 break;
             }
         }
+
+        attempts -= 1;
+        println!("Try again, attempts left: {}", attempts);
     }
 }
