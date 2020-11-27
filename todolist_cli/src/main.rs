@@ -1,3 +1,36 @@
+use std::io;
+
 fn main() {
-    println!("Hello, world!");
+    let mut saved_todos = [];
+
+    loop {
+        let mut user_input = String::new();
+
+        io::stdin()
+            .read_line(&mut user_input)
+            .expect("Failed to read user input!");
+
+        let mut user_input = user_input.split_whitespace();
+
+        let cmd: &str = match user_input.next() {
+            Some(cmd) => cmd,
+            None => continue,
+        };
+
+        if cmd == "list" {
+            for todo in saved_todos.iter() {
+                println!("{}", todo);
+            }
+        }
+
+        if cmd == "add" {
+            let mut result = String::new();
+
+            for part in user_input {
+                result += part;
+            }
+
+            saved_todos[saved_todos.len()] = result;
+        }
+    }
 }
