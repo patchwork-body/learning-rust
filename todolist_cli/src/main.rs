@@ -18,21 +18,24 @@ fn main() {
             None => continue,
         };
 
-        if cmd == "list" {
-            for todo in saved_todos.iter() {
-                println!("{}", todo);
+        match cmd {
+            "add" => {
+                let mut result = String::new();
+
+                for part in user_input {
+                    result += " ";
+                    result += part;
+                }
+
+                saved_todos.push(result);
             }
-        }
-
-        if cmd == "add" {
-            let mut result = String::new();
-
-            for part in user_input {
-                result += " ";
-                result += part;
+            "list" => {
+                for (index, todo) in saved_todos.iter().enumerate() {
+                    println!("{}: {}", index + 1, todo.trim());
+                }
             }
-
-            saved_todos.push(result);
+            "exit" => break,
+            _ => continue
         }
     }
 }
