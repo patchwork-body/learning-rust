@@ -1,7 +1,8 @@
 use std::io;
 
+
 fn main() {
-    let mut saved_todos = [];
+    let mut saved_todos: Vec<String> = Vec::new();
 
     loop {
         let mut user_input = String::new();
@@ -27,10 +28,11 @@ fn main() {
             let mut result = String::new();
 
             for part in user_input {
+                result += " ";
                 result += part;
             }
 
-            saved_todos[saved_todos.len()] = result;
+            saved_todos.push(result);
         }
     }
 }
